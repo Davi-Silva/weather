@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
 import slugify from 'slugify'
+import { FaSearch } from "react-icons/fa";
+
+import {
+  Form,
+  MainInputsDiv,
+  Input,
+  Select,
+  Button
+} from '../../../styles/components/UI/Form/Form'
 
 const Search = ({ setResult }) => {
   const [city, setCity] = useState('')
@@ -32,16 +41,18 @@ const Search = ({ setResult }) => {
   }
 
   return (
-    <form onSubmit={handleSearch}>
-      <input type='text' onChange={onChangeCity} value={city} />
-      <input type='text' onChange={onChangeState} value={state} />
-      <input type='text' onChange={onChangeCountry} value={country} />
-      <select onChange={onChangeUnits}>
+    <Form onSubmit={handleSearch}>
+      <MainInputsDiv>
+        <Input type='text' onChange={onChangeCity} value={city} placeholder='City' />
+        <Input type='text' onChange={onChangeState} value={state} placeholder='State' />
+        <Input type='text' onChange={onChangeCountry} value={country} placeholder='Country' />
+        <Button type='submit'><FaSearch /></Button>
+      </MainInputsDiv>
+      <Select onChange={onChangeUnits}>
         <option value='metric'>Metric</option>
         <option value='imperial'>Imperial</option>
-      </select>
-      <button type='submit'>Search</button>
-    </form>
+      </Select>
+    </Form>
   )
 }
 
