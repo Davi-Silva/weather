@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import slugify from 'slugify'
 import { FaSearch } from "react-icons/fa";
 
@@ -10,11 +10,24 @@ import {
   Button
 } from '../../../styles/components/UI/Form/Form'
 
-const Search = ({ setResult }) => {
+const Search = ({ setResult, setUnitSymbol, setShowCard, showCard }) => {
   const [city, setCity] = useState('')
   const [state, setState] = useState('')
   const [country, setCountry] = useState('')
   const [units, setUnits] = useState('metric')
+
+  useEffect(() => {
+    if (units === 'metric') {
+      setUnitSymbol('ºC')
+    } else if (units === 'imperial') {
+      setUnitSymbol('ºF')
+    }
+  }, [units])
+
+  useEffect(() => {
+    setShowCard(false)
+  }, [city, state, country, units])
+
 
   const onChangeCity = (e) => {
     setCity(e.target.value)
@@ -38,10 +51,11 @@ const Search = ({ setResult }) => {
 
     const data = await response.json()
     setResult(data)
+    setShowCard(true)
   }
 
   return (
-    <Form onSubmit={handleSearch}>
+    <Form onSubmit={handleSearch} showCard={showCard}>
       <MainInputsDiv>
         <Input type='text' onChange={onChangeCity} value={city} placeholder='City' />
         <Input type='text' onChange={onChangeState} value={state} placeholder='State' />

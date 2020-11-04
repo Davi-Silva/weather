@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-import { Navbar, Container, WhatIs } from '../../../styles/components/UI/NavigationBar/NavigationBar'
+import { Navbar, Container, Brand, WhatIs } from '../../../styles/components/UI/NavigationBar/NavigationBar'
 
 const NavigationBar = () => {
   return (
     <Navbar>
       <Container>
         <div>
-          <h4>Weather</h4>
+          <Brand>Weather</Brand>
         </div>
         <div>
           <Link href='/about' as='/about'>
